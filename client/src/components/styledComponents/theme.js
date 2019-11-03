@@ -55,7 +55,7 @@ export const dark = {
     'color': '#abb1ba',
     'cards': {
         'borderColor': '#3C4858',
-        'background': '#333',
+        'backgroundColor': '#333',
     },
     'solidButton': {
         'backgroundColor': '#4BD5EE',

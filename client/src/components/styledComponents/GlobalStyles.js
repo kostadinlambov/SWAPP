@@ -1,11 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
- 
-    .App-footer{
-    margin-top: auto;
-    }
-
     /* Common collors */
     .yellow{
         color: #FFE300
@@ -19,8 +14,16 @@ const GlobalStyle = createGlobalStyle`
         color: #000
     }
 
+    .background-black{
+        background-color: #000
+    }
+
     .white{
         color: #FFF
+    }
+
+    .App-footer{
+    margin-top: auto;
     }
 
     

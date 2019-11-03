@@ -76,8 +76,6 @@ const TomatoButton = styled(ButtonWithProps)`
   border-color: tomato;
 `;
 
-
-
 class Test extends Component {
   state = {
     email: '',

@@ -1,67 +1,70 @@
 import React, { Component } from 'react';
 import {
-  Container,
   Col,
   Form,
   FormGroup,
-  Label,
   Input,
-  Button,
-  FormText,
 } from 'reactstrap';
 
-import styled from 'styled-components';
-const Styles = styled.div`
-width: 30%;
-margin: auto;
+import styled, { withTheme } from 'styled-components';
 
-.submit-btn{
-  color:#FFE300;
-  background-color:#000;
-  border-color: #E5E9F2;
-
-  &:hover{
-    color:#FFE300;
-    background-color:#4BD5EE;
-    border-color: none
-  }
-}
-
-.navbar-toggler-icon{
-  color: #4BD5EE;
-  background-color: #4BD5EE;
-}
+const FormWrapper = styled.div`
+  width: 40%;
+  margin: auto;
+  padding: 0 1rem 1rem;
+  margin-top: 2rem;
 `;
 
-const ButtonC = styled.button.attrs({
-  className: 'btn btn-primary'
-})`
-&&&{
-  color:#FFE300;
-  background-color: #000;
-  border-color: #E5E9F2;
+const FormElementsWrapper = styled.div`
+  width: 90%;
+  margin: auto;
 
- :hover{
-    background-color:#4BD5EE;
-    border-color: none;
-    color:#FFE300;
+  .text-align-right{
+    text-align:right
   }
-}
 `;
 
-const StyledReactButton = styled(Button)`
-  /* width: 90%; */
-  /* max-width: 40rem; */
-  margin: 2rem auto;
-  padding: 1rem;
-  color: red;
-  background-color:#000;
-  border-color: #E5E9F2;
+const StyledForm = styled(Form)`
+  border-color: ${props => props.theme.cards.borderColor};
+  background-color: ${props => props.theme.cards.backgroundColor};
+  padding: 2.5rem 1rem 1rem;
+  border-radius: 10px;
+`;
 
-  :hover{
-    color:#FFE300;
-    background-color:#4BD5EE;
-    border-color: none
+const StyledButton = styled.button`
+  background-color: ${props => props.theme.solidButton.backgroundColor};
+  border-color: ${props => props.theme.solidButton.borderColor};
+  color: ${props => props.theme.solidButton.color};
+  padding: 0.2rem 1rem;
+  font-weight: bold;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  text-align: right;
+
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const StyledHeader = styled.h2`
+  color: #ffe300;
+  font-family: 'SfDistantGalaxy';
+  font-size: 6rem;
+  text-align: center;
+  line-height: 1;
+  margin-bottom: 0;
+`;
+
+const StyledInput = styled(Input)`
+  &.form-control {
+    background-color: ${props => props.theme.input.backgroundColor};
+    border-color: ${props => props.theme.input.borderColor};
+    color: ${props => props.theme.input.color};
+    width: 92%;
+    padding: .125rem .75rem;
+    margin: auto;
+    line-height: 0.8;
   }
 `;
 
@@ -120,41 +123,53 @@ class LoginForm extends Component {
   };
 
   render() {
+    console.log(this.props.theme);
+    console.log('backgroundColor: ', this.props.theme.input.backgroundColor);
+    console.log('borderColor: ', this.props.theme.input.borderColor);
+    console.log('color: ', this.props.theme.input.color);
+    console.log(
+      'cards backgroundColor: ',
+      this.props.theme.cards.backgroundColor,
+    );
+    console.log('cards borderColor: ', this.props.theme.cards.borderColor);
+
     return (
-      <> 
-      <Styles>
-        <Container className="App">
-          <h2>Sign In</h2>
-          <Form className="form">
-            <Col>
-              <FormGroup>
-                <Input
-                  type="email"
-                  name="email"
-                  id="exampleEmail"
-                  placeholder="myemail@email.com"
-                />
-                <FormText>Your username is most likely your email.</FormText>
-              </FormGroup>
-            </Col>
-            <Col>
-              <FormGroup>
-                <Input
-                  type="password"
-                  name="password"
-                  id="examplePassword"
-                  placeholder="********"
-                />
-              </FormGroup>
-            </Col>
-            <StyledReactButton>Login</StyledReactButton>
-          </Form>
-        </Container>
-      </Styles>
-      <ButtonC className="submit-btn" >Login</ButtonC>
+      <>
+        <FormWrapper className="background-black">
+          <StyledHeader>SWAPP</StyledHeader>
+          <StyledForm>
+            <FormElementsWrapper>
+              <div>
+                <FormGroup>
+                  <StyledInput
+                    type="email"
+                    name="email"
+                    id="exampleEmail"
+                    placeholder="myemail@email.com"
+                  />
+                </FormGroup>
+              </div>
+              <div>
+                <FormGroup>
+                  <StyledInput
+                    type="password"
+                    name="password"
+                    id="examplePassword"
+                    placeholder="********"
+                  />
+                </FormGroup>
+              </div>
+               <div className="text-align-right">
+                 <StyledButton>Login</StyledButton>
+              </div>
+            </FormElementsWrapper>
+            
+          </StyledForm>
+        </FormWrapper>
       </>
     );
   }
 }
 
-export default LoginForm;
+// export default LoginForm;
+export default withTheme(LoginForm);
