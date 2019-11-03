@@ -1,39 +1,49 @@
-import React, { Component, Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
-import './App.css';
+import { ThemeProvider} from 'styled-components';
+import { light, dark } from './components/styledComponents/theme';
+import GlobalStyle from './components/styledComponents/GlobalStyles'
 
+import NavbarComponent from './components/navbar/Navbar';
 import LoginForm from './pages/login/LoginForm';
 import CharacterPreview from './pages/characters/components/CharacterPreview';
 import Characters from './pages/characters/pages/Characters';
 import Episodes from './pages/episodes/pages/Episodes';
 import EpisodesPreview from './pages/episodes/components/EpisodePreview';
-
-import Starships from './pages/starships/pages/Starships';
 import StrarshipPreview from './pages/starships/components/StarshipPreview';
 
-import Test from './components/Test';
-import NavbarComponent from './pages/navbar/Navbar';
+import Test from './components/styledComponents/Test';
+import { Layout } from './components/layout/Layout';
 
-function App() {
+const App = (props) =>  {
+  const [currentTheme, setCurrentTheme] = useState(light);
+
+  const handleClick = () => {
+    setCurrentTheme(
+      currentTheme === light ? dark : light
+    )
+  }
   return (
     <>
-      <div className="App">
-        <NavbarComponent />
-        <Suspense>
-          <Switch>
-            <Route exact path="/login" component={LoginForm}/>
-            <Route exact path="/episodes" component={Episodes}/>
-            <Route exact path="/episodes/:episodeId" component={EpisodesPreview}/>
-            <Route exact path="/characters" component={Characters}/>
-            <Route exact path="/characters/:characterId" component={CharacterPreview}/>
-            {/* <Route exact path="/starships" component={Starships}/> */}
-            <Route exact path="/starships/:starshipId" component={StrarshipPreview}/>
-          </Switch>
-          
-          <Test></Test>
-        </Suspense>
-      </div>
+      <ThemeProvider theme={currentTheme} >
+        <NavbarComponent changeTheme={handleClick}/>
+        <Layout>
+          <Suspense>
+            <Switch>
+              <Route exact path="/login" component={LoginForm}/>
+              <Route exact path="/episodes" component={Episodes}/>
+              <Route exact path="/episodes/:episodeId" component={EpisodesPreview}/>
+              <Route exact path="/characters" component={Characters}/>
+              <Route exact path="/characters/:characterId" component={CharacterPreview}/>
+              <Route exact path="/starships/:starshipId" component={StrarshipPreview}/>
+            </Switch>
+            
+            <Test></Test>
+          </Suspense>
+        </Layout>
+        <GlobalStyle />
+        </ThemeProvider>
     </>
   );
 }

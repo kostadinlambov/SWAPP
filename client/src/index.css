@@ -11,3 +11,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Reset CSS */
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  min-height: 100vh;
+}
+
+@font-face {
+  font-family: 'SfDistantGalaxy';
+  src: url("./fonts/SfDistantGalaxy-0l3d.ttf") format("truetype"),
+    url("./fonts/SfDistantGalaxyAlternate-OE4d.ttf") format("truetype"),
+    url("./fonts/SfDistantGalaxyAlternateItalic-3RDM.ttf") format("truetype"),
+    url("./fonts/SfDistantGalaxyAltoutline-e2Bp.ttf") format("truetype"),
+    url("./fonts/SfDistantGalaxySymbols-aylE.ttf") format("truetype"),
+    url("./fonts/SfDistantGalaxyOutline-xoeO.ttf") format("truetype"),
+    url("./fonts/SfDistantGalaxySymbols-aylE.ttf") format("truetype");
+}
