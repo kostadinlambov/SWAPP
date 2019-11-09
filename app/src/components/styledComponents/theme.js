@@ -47,6 +47,9 @@ export const light = {
         'backgroundColor': '#000',
         'color': '#4BD5EE',
         'grid': '#3C4858',
+    },
+    'spinnerColor': {
+        color: '#000'
     }
 }
 
@@ -102,5 +105,8 @@ export const dark = {
         'backgroundColor': '#000',
         'color': '#FFE300',
         'grid': '#333',
+    },
+    'spinnerColor': {
+        color: '#4BD5EE'
     }
 }

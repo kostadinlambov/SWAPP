@@ -7,7 +7,7 @@ import Characters from './characters/pages/Characters';
 import CharacterPreview from './characters/components/CharacterPreview';
 import StrarshipPreview from './starships/components/StarshipPreview';
 
-const Pages = props => {
+const Pages = () => {
   return (
     <>
       <Suspense>

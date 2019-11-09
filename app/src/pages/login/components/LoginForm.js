@@ -7,66 +7,6 @@ import {
 
 import styled, { withTheme } from 'styled-components';
 
-const FormWrapper = styled.div`
-  width: 40%;
-  margin: auto;
-  padding: 0 1rem 1rem;
-  margin-top: 2rem;
-`;
-
-const FormElementsWrapper = styled.div`
-  width: 90%;
-  margin: auto;
-
-  .text-align-right{
-    text-align:right
-  }
-`;
-
-const StyledForm = styled(Form)`
-  border-color: ${props => props.theme.cards.borderColor};
-  background-color: ${props => props.theme.cards.backgroundColor};
-  padding: 2.5rem 1rem 1rem;
-  border-radius: 10px;
-`;
-
-const StyledButton = styled.button`
-  background-color: ${props => props.theme.solidButton.backgroundColor};
-  border-color: ${props => props.theme.solidButton.borderColor};
-  color: ${props => props.theme.solidButton.color};
-  padding: 0.2rem 1rem;
-  font-weight: bold;
-  outline: none;
-  border-radius: 5px;
-  border: none;
-  text-align: right;
-
-  :hover {
-    cursor: pointer;
-  }
-`;
-
-const StyledHeader = styled.h2`
-  color: #ffe300;
-  font-family: 'SfDistantGalaxy';
-  font-size: 6rem;
-  text-align: center;
-  line-height: 1;
-  margin-bottom: 0;
-`;
-
-const StyledInput = styled(Input)`
-  &.form-control {
-    background-color: ${props => props.theme.input.backgroundColor};
-    border-color: ${props => props.theme.input.borderColor};
-    color: ${props => props.theme.input.color};
-    width: 92%;
-    padding: .125rem .75rem;
-    margin: auto;
-    line-height: 0.8;
-  }
-`;
-
 class LoginForm extends Component {
   constructor(props) {
     super(props);
@@ -74,6 +14,7 @@ class LoginForm extends Component {
     this.state = {
       email: '',
       password: '',
+      errorMessage: 'error',
       touched: {
         email: false,
         password: false,
@@ -123,12 +64,15 @@ class LoginForm extends Component {
   };
 
   render() {
+    console.log('errorMessage:', this.props.errorMessage)
+    console.log('props:', this.props)
     return (
       <>
         <FormWrapper className="background-black">
           <StyledHeader>SWAPP</StyledHeader>
           <StyledForm onSubmit={this.onSubmitHandler}>
             <FormElementsWrapper>
+            <ErrorMessage>{this.props.errorMessage}</ErrorMessage>
               <div>
                 <FormGroup>
                   <StyledInput
@@ -164,3 +108,87 @@ class LoginForm extends Component {
 }
 
 export default LoginForm;
+
+// Styled Components
+const ErrorMessage = styled.div`
+  color: red;
+  text-align: left;
+  position: absolute;
+  top: -2.2rem;
+  left: 0;
+  font-weight: 600;
+`
+
+const FormWrapper = styled.div`
+  width: 40%;
+  margin: auto;
+  padding: 0 1rem 1rem;
+  margin-top: 2rem;
+`;
+
+const FormElementsWrapper = styled.div`
+  width: 90%;
+  margin: auto;
+  position: relative;
+
+  .text-align-right{
+    text-align:right
+  }
+`;
+
+const StyledForm = styled(Form)`
+  border-color: ${props => props.theme.cards.borderColor};
+  background-color: ${props => props.theme.cards.backgroundColor};
+  padding: 3.5rem 1rem 1.2rem;
+  border-radius: 10px;
+`;
+
+const StyledButton = styled.button`
+  background-color: ${props => props.theme.solidButton.backgroundColor};
+  border-color: ${props => props.theme.solidButton.borderColor};
+  color: ${props => props.theme.solidButton.color};
+  padding: 0.2rem 1rem;
+  font-weight: bold;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  text-align: right;
+
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const StyledHeader = styled.h2`
+  color: #ffe300;
+  font-family: 'SfDistantGalaxy';
+  font-size: 6rem;
+  text-align: center;
+  line-height: 1;
+  margin-bottom: 0;
+
+  @media (max-width: 1000px){
+    font-size: 4rem;
+  }
+
+  @media (max-width: 768px){
+    font-size: 3rem;
+  }
+
+  @media (max-width: 600px){
+    font-size: 2rem;
+  }
+
+`;
+
+const StyledInput = styled(Input)`
+  &.form-control {
+    background-color: ${props => props.theme.input.backgroundColor};
+    border-color: ${props => props.theme.input.borderColor};
+    color: ${props => props.theme.input.color};
+    width: 92%;
+    padding: .125rem .75rem;
+    margin: auto;
+    line-height: 0.8;
+  }
+`;
