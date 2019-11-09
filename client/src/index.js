@@ -6,10 +6,15 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
+import { ApolloProvider } from '@apollo/react-hooks';
+import client from './client/index';
+
 
 ReactDOM.render(
-  <Router>
-       <App />
-  </Router>,
+  <ApolloProvider client={client}>
+    <Router>
+      <App />
+    </Router>
+  </ApolloProvider>,
   document.getElementById('root'),
 );

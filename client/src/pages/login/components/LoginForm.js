@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Col,
   Form,
   FormGroup,
   Input,
@@ -73,10 +72,10 @@ class LoginForm extends Component {
     super(props);
 
     this.state = {
-      username: '',
+      email: '',
       password: '',
       touched: {
-        username: false,
+        email: false,
         password: false,
       },
     };
@@ -86,6 +85,7 @@ class LoginForm extends Component {
   }
 
   onChangeHandler(event) {
+    console.log(event.target.name)
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -98,13 +98,13 @@ class LoginForm extends Component {
       return;
     }
 
-    const { username, password } = this.state;
-    // this.props.login(username, password);
+    const { email, password } = this.state;
+    this.props.login({ variables: { email: email, password: password } });
   }
 
   canBeSubmitted() {
-    const { username, password } = this.state;
-    const errors = this.validate(username, password);
+    const { email, password } = this.state;
+    const errors = this.validate(email, password);
     const isDisabled = Object.keys(errors).some(x => errors[x]);
     return !isDisabled;
   }
@@ -115,29 +115,19 @@ class LoginForm extends Component {
     });
   };
 
-  validate = (username, password) => {
+  validate = (email, password) => {
     return {
-      username: username.length === 0,
+      username: email.length === 0,
       password: password.length === 0,
     };
   };
 
   render() {
-    console.log(this.props.theme);
-    console.log('backgroundColor: ', this.props.theme.input.backgroundColor);
-    console.log('borderColor: ', this.props.theme.input.borderColor);
-    console.log('color: ', this.props.theme.input.color);
-    console.log(
-      'cards backgroundColor: ',
-      this.props.theme.cards.backgroundColor,
-    );
-    console.log('cards borderColor: ', this.props.theme.cards.borderColor);
-
     return (
       <>
         <FormWrapper className="background-black">
           <StyledHeader>SWAPP</StyledHeader>
-          <StyledForm>
+          <StyledForm onSubmit={this.onSubmitHandler}>
             <FormElementsWrapper>
               <div>
                 <FormGroup>
@@ -146,6 +136,7 @@ class LoginForm extends Component {
                     name="email"
                     id="exampleEmail"
                     placeholder="myemail@email.com"
+                    onChange={this.onChangeHandler}
                   />
                 </FormGroup>
               </div>
@@ -156,6 +147,7 @@ class LoginForm extends Component {
                     name="password"
                     id="examplePassword"
                     placeholder="********"
+                    onChange={this.onChangeHandler}
                   />
                 </FormGroup>
               </div>
@@ -171,5 +163,4 @@ class LoginForm extends Component {
   }
 }
 
-// export default LoginForm;
-export default withTheme(LoginForm);
+export default LoginForm;
