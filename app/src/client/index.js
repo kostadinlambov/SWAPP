@@ -5,12 +5,14 @@ import { resolvers, typeDefs } from './local';
 
 const cache = new InMemoryCache();
 
+const token = localStorage.getItem('token') ? "Bearer " + localStorage.getItem('token'): ''
+
 const client = new ApolloClient({
   cache,
   link: new HttpLink({
     uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
     headers: {
-      authorization: localStorage.getItem('token'),
+      Authorization: token,
     },
   }),
   typeDefs,

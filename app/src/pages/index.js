@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Episodes from './episodes/pages/Episodes';
-import EpisodesPreview from './episodes/components/EpisodePreview';
+import EpisodesPreview from './episodes/pages/EpisodesPreview';
 import Characters from './characters/pages/Characters';
 import CharacterPreview from './characters/components/CharacterPreview';
 import StrarshipPreview from './starships/components/StarshipPreview';

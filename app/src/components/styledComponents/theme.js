@@ -4,6 +4,10 @@ export const light = {
     'cards': {
         'borderColor': '#E5E9F2',
         'backgroundColor': '#FFF',
+        'color': '#000',
+        'title':{
+            'color': '#4BD5EE',
+        }
     },
     'solidButton': {
         'backgroundColor': '#000',
@@ -59,6 +63,10 @@ export const dark = {
     'cards': {
         'borderColor': '#3C4858',
         'backgroundColor': '#333',
+        'color': '#FFF',
+        'title':{
+            'color': '#FFE300',
+        }
     },
     'solidButton': {
         'backgroundColor': '#4BD5EE',

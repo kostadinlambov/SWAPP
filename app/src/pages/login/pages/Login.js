@@ -4,7 +4,6 @@ import gql from 'graphql-tag';
 
 import LoginForm from './../components/LoginForm';
 import {Loading} from '../../../components/Loading';
-import Test from './../../../components/styledComponents/Test';
 
 const LOGIN_USER = gql`
   mutation signIn($email: String!, $password: String!) {
@@ -34,6 +33,5 @@ export default function Login() {
     return <LoginForm login={signIn} errorMessage={errorMessage}/>;
   } 
 
-  debugger;
   return <LoginForm login={signIn}  errorMessage={''}/>;
 }

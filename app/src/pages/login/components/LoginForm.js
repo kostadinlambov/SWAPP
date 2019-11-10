@@ -5,7 +5,8 @@ import {
   Input,
 } from 'reactstrap';
 
-import styled, { withTheme } from 'styled-components';
+import styled  from 'styled-components';
+import ErrorMessage from '../../../components/ErrorMessage'
 
 class LoginForm extends Component {
   constructor(props) {
@@ -64,15 +65,13 @@ class LoginForm extends Component {
   };
 
   render() {
-    console.log('errorMessage:', this.props.errorMessage)
-    console.log('props:', this.props)
     return (
       <>
         <FormWrapper className="background-black">
           <StyledHeader>SWAPP</StyledHeader>
           <StyledForm onSubmit={this.onSubmitHandler}>
             <FormElementsWrapper>
-            <ErrorMessage>{this.props.errorMessage}</ErrorMessage>
+            <ErrorMessage padding={'0 0 0.5rem 0'}>{this.props.errorMessage}</ErrorMessage>
               <div>
                 <FormGroup>
                   <StyledInput
@@ -110,15 +109,6 @@ class LoginForm extends Component {
 export default LoginForm;
 
 // Styled Components
-const ErrorMessage = styled.div`
-  color: red;
-  text-align: left;
-  position: absolute;
-  top: -2.2rem;
-  left: 0;
-  font-weight: 600;
-`
-
 const FormWrapper = styled.div`
   width: 40%;
   margin: auto;
@@ -139,7 +129,7 @@ const FormElementsWrapper = styled.div`
 const StyledForm = styled(Form)`
   border-color: ${props => props.theme.cards.borderColor};
   background-color: ${props => props.theme.cards.backgroundColor};
-  padding: 3.5rem 1rem 1.2rem;
+  padding: 2.5rem 1rem 1.2rem;
   border-radius: 10px;
 `;
 
