@@ -7,6 +7,9 @@ export const light = {
         'color': '#000',
         'title':{
             'color': '#4BD5EE',
+        },
+        'subtitle':{
+            'color': '#000',
         }
     },
     'solidButton': {
@@ -66,6 +69,9 @@ export const dark = {
         'color': '#FFF',
         'title':{
             'color': '#FFE300',
+        },
+        'subtitle':{
+            'color': '#4BD5EE',
         }
     },
     'solidButton': {

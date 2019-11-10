@@ -22,8 +22,10 @@ export default function Login() {
     },
   });
 
+  debugger;
   if (loading) return <Loading spinnerSize={'15rem'} marginTop={'5rem'}/>;
   if (error) {
+    debugger;
     let errorMessage = error.message;
   
     if(errorMessage.startsWith('GraphQL error:')){

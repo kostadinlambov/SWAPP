@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Episodes from './episodes/pages/Episodes';
 import EpisodesPreview from './episodes/pages/EpisodesPreview';
 import Characters from './characters/pages/Characters';
-import CharacterPreview from './characters/components/CharacterPreview';
+import CharacterPreview from './characters/pages/CharacterPreview';
 import StrarshipPreview from './starships/components/StarshipPreview';
 
 const Pages = () => {

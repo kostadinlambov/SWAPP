@@ -1,64 +1,56 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function EpisodesCard({ episode, ...props }) {
-  const { title, image, openingCrawl, id } = episode;
-
-  const openingCrawlSubstr = openingCrawl.substring(0, 200)  + ' ...'
-
-  const onClickHandler = (e) => {
-    e.preventDefault();
-    props.history.push(`/episodes/${id}`)
-  }
+export default function EpisodeHeadCard(props) {
+  const { title, image, episodeId } = props;
 
   return (
-    <StyledCard onClick={onClickHandler}>
+    <StyledCard>
       <StyledImageWrapper>
         <StyledImage src={image} alt="Episode image" />
       </StyledImageWrapper>
       <StyledContentWrapper>
-        <StyledTitle >{title}</StyledTitle>
-        <StyledDescription>{openingCrawlSubstr}</StyledDescription>
+        <StyledTitle>Star Wars: Episode {episodeId} </StyledTitle>
+        <StyledDescription>{title}</StyledDescription>
       </StyledContentWrapper>
     </StyledCard>
   );
 }
 
 // Styled Components
-const StyledCard = styled.a`
+const StyledCard = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   border-color: ${props => props.theme.cards.borderColor};
   background-color: ${props => props.theme.cards.backgroundColor};
-  border-radius: 7px;
+  border-radius: 10px;
   overflow: hidden;
-  width: 60%;
+  width: 100%;
   margin: 2rem auto;
-  cursor: pointer;
 
-  @media (max-width: 600px){
+  @media (max-width: 600px) {
     margin: 1rem auto;
-    width: 70%;
+    width: 100%;
   }
 `;
 
 const StyledImageWrapper = styled.div`
-
+  flex: 0 0 33%;
   position: relative;
   overflow: hidden;
 
-  /* &::after{
+  &::after{
     display:block;
     content: '';
     padding-top: 100%;
-  } */
+  }
 `;
 
 const StyledImage = styled.img`
   display: block;
-  /* position: absolute; */
+  position: absolute;
   left: 0;
   right: 0;
   width: 100%;
@@ -66,18 +58,23 @@ const StyledImage = styled.img`
 `;
 
 const StyledContentWrapper = styled.div`
-  padding: 1rem 1rem;
+  flex: 0 1 65%;
+  padding: 1rem 3rem;
+  text-align: left;
 `;
 
 const StyledTitle = styled.div`
   color: ${props => props.theme.cards.title.color};
-  font-size: 1.5rem;
-  font-weight: 900;
+  font-family: 'SfDistantGalaxy';
+  font-size: 2.2rem;
+  font-weight: 400;
   margin: 0 0 0.4rem 0;
   line-height: 1;
 `;
 
 const StyledDescription = styled.div`
-  font-size: 0.9rem;
-  color: ${props => props.theme.cards.color};
+  color: ${props => props.theme.cards.subtitle.color};
+  font-size: 1.8rem;
+  font-weight: 900;
+  line-height: 1;
 `;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useApolloClient, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { Loading } from '../../../components/Loading';
 import EpisodesCard from '../components/EpisodesCard';
@@ -28,12 +28,10 @@ const FETCH_ALL_EPISODES = gql`
 `;
 
 export default function Episodes(props) {
-  const client = useApolloClient();
-
   const { data, loading, error } = useQuery(FETCH_ALL_EPISODES, {
     variables: { first: 7 },
   });
-
+  debugger;
   if (loading) return <Loading />;
   if (error) {
     let errorMessage = error.message;
@@ -41,14 +39,14 @@ export default function Episodes(props) {
     if (errorMessage.startsWith('GraphQL error:')) {
       errorMessage = errorMessage.split(':')[1].trim();
     }
-
+    debugger;
     return (
       <ErrorMessage textAlingn={'center'} margin={'4rem 0 0 0'}>
         {errorMessage}
       </ErrorMessage>
     );
   }
-
+  debugger;
   const allEpisodes = data['allEpisodes']['edges'].sort(
     (first, second) => first.node.episodeId - second.node.episodeId,
   );

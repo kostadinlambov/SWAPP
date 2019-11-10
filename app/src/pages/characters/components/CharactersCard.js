@@ -1,24 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
+import placeholder from '../../../assets/stormtrooper.jpeg'
 
-export default function EpisodesCard({ episode, ...props }) {
-  const { title, image, openingCrawl, id } = episode;
+export default function CharactersCard({ character, ...props }) {
+  const { name, image, id, starships } = character;
 
-  const openingCrawlSubstr = openingCrawl.substring(0, 200)  + ' ...'
+  const characterImage = image || placeholder;
 
-  const onClickHandler = (e) => {
+  const onClickHandler = e => {
     e.preventDefault();
-    props.history.push(`/episodes/${id}`)
-  }
+    props.history.push(`/characters/${id}`)
+  };
 
   return (
     <StyledCard onClick={onClickHandler}>
       <StyledImageWrapper>
-        <StyledImage src={image} alt="Episode image" />
+        <StyledImage src={characterImage} alt="Character image" />
       </StyledImageWrapper>
       <StyledContentWrapper>
-        <StyledTitle >{title}</StyledTitle>
-        <StyledDescription>{openingCrawlSubstr}</StyledDescription>
+        <StyledName>{name}</StyledName>
       </StyledContentWrapper>
     </StyledCard>
   );
@@ -27,57 +27,52 @@ export default function EpisodesCard({ episode, ...props }) {
 // Styled Components
 const StyledCard = styled.a`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   border-color: ${props => props.theme.cards.borderColor};
   background-color: ${props => props.theme.cards.backgroundColor};
   border-radius: 7px;
   overflow: hidden;
-  width: 60%;
-  margin: 2rem auto;
+  width: 100%;
   cursor: pointer;
 
-  @media (max-width: 600px){
-    margin: 1rem auto;
-    width: 70%;
+  @media (max-width: 1000px) {
+    width: 80%;
+    margin: auto;
   }
 `;
 
 const StyledImageWrapper = styled.div`
-
+  flex: 0 0 33%;
   position: relative;
   overflow: hidden;
 
-  /* &::after{
+  &::after{
     display:block;
     content: '';
     padding-top: 100%;
-  } */
+  }
 `;
 
 const StyledImage = styled.img`
   display: block;
-  /* position: absolute; */
+  position: absolute;
   left: 0;
   right: 0;
-  width: 100%;
-  height: auto;
+  width:auto ;
+  height: 100%;
 `;
 
 const StyledContentWrapper = styled.div`
-  padding: 1rem 1rem;
+  flex: 0 1 65%;
+  padding: 0.5rem;
+  text-align: center;
 `;
 
-const StyledTitle = styled.div`
+const StyledName = styled.div`
   color: ${props => props.theme.cards.title.color};
-  font-size: 1.5rem;
-  font-weight: 900;
-  margin: 0 0 0.4rem 0;
-  line-height: 1;
-`;
-
-const StyledDescription = styled.div`
-  font-size: 0.9rem;
-  color: ${props => props.theme.cards.color};
+  font-size: 1.1rem;
+  /* font-weight: 600; */
+  font-family: "SfDistantGalaxy";
 `;
