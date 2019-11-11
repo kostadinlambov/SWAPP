@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,7 +6,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+ 
 }
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -40,4 +45,24 @@ code {
     url("./fonts/SfDistantGalaxySymbols-aylE.ttf") format("truetype"),
     url("./fonts/SfDistantGalaxyOutline-xoeO.ttf") format("truetype"),
     url("./fonts/SfDistantGalaxySymbols-aylE.ttf") format("truetype");
+}
+
+
+
+@media (max-width: 1000px){
+  #root{
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px){
+  #root{
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 600px){
+  #root{
+    font-size: 10px;
+  }
 }

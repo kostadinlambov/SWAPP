@@ -29,6 +29,14 @@ const FETCH_EPISODE = gql`
             id
             name
             image
+            height
+            species {
+              name
+            }
+            mass
+            homeworld {
+              name
+            }
             starships {
               edges {
                 node {
@@ -88,9 +96,8 @@ export default function EpisodesPreview(props) {
   const pageInfo = people['pageInfo'];
 
   const { endCursor, hasNextPage } = pageInfo;
-  debugger;
+  
   const onLoadMore = () => {
-    debugger;
     fetchMore({
       variables: { first: 5, after: endCursor },
       updateQuery: (prev, { fetchMoreResult: { episode } }) => {
@@ -99,7 +106,6 @@ export default function EpisodesPreview(props) {
         if (!people.edges.length) {
           return prev;
         }
-        debugger;
         return {
           episode: {
             ...episode,
@@ -116,8 +122,8 @@ export default function EpisodesPreview(props) {
       },
     });
   };
-  debugger;
-  return (
+
+return (
     <EpisodeContainer>
       <EpisodeHeadCard episodeId={episodeId} title={title} image={image} />
       <EpisodeDescriprionCard

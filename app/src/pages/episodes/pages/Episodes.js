@@ -31,7 +31,7 @@ export default function Episodes(props) {
   const { data, loading, error } = useQuery(FETCH_ALL_EPISODES, {
     variables: { first: 7 },
   });
-  debugger;
+
   if (loading) return <Loading />;
   if (error) {
     let errorMessage = error.message;
@@ -39,14 +39,14 @@ export default function Episodes(props) {
     if (errorMessage.startsWith('GraphQL error:')) {
       errorMessage = errorMessage.split(':')[1].trim();
     }
-    debugger;
-    return (
+
+return (
       <ErrorMessage textAlingn={'center'} margin={'4rem 0 0 0'}>
         {errorMessage}
       </ErrorMessage>
     );
   }
-  debugger;
+
   const allEpisodes = data['allEpisodes']['edges'].sort(
     (first, second) => first.node.episodeId - second.node.episodeId,
   );

@@ -17,6 +17,14 @@ const FETCH_ALL_CHARACTERS = gql`
           id
           name
           image
+          height
+          species {
+            name
+          }
+          mass
+          homeworld {
+            name
+          }
           starships {
             edges {
               node {
@@ -39,13 +47,11 @@ const FETCH_ALL_CHARACTERS = gql`
 `;
 
 export default function Characters(props) {
-  debugger;
   const { data, loading, error, fetchMore } = useQuery(FETCH_ALL_CHARACTERS, {
-    variables: {first: 12 },
+    variables: { first: 12 },
     // fetchPolicy: 'cache-first'
   });
-  console.log('data: ', data);
-  debugger;
+ 
 
   if (loading) return <Loading />;
   if (error) {
@@ -62,36 +68,32 @@ export default function Characters(props) {
     );
   }
 
-
   const allCharacters = data['allPeople']['edges'];
   const pageInfo = data['allPeople']['pageInfo'];
-  debugger;
+
   const { endCursor, hasNextPage } = pageInfo;
 
   const onLoadMore = () => {
     fetchMore({
-      variables: {first: 12 , after: endCursor },
-      updateQuery: (prev, {fetchMoreResult: {allPeople}}) => {
+      variables: { first: 12, after: endCursor },
+      updateQuery: (prev, { fetchMoreResult: { allPeople } }) => {
         if (!allPeople.edges.length) {
           return prev;
         }
         return {
           allPeople: {
             ...allPeople,
-            edges:[
-              ...prev.allPeople.edges,
-              ...allPeople.edges
-            ],
+            edges: [...prev.allPeople.edges, ...allPeople.edges],
             pageInfo: {
               ...prev.allPeople.pageInfo,
               ...allPeople.pageInfo,
-            }
-          }
-        }
-      }
+            },
+          },
+        };
+      },
     });
   };
-  debugger;
+
   return (
     <CharacterPageWrapper>
       <CharactersContainer>
@@ -111,4 +113,3 @@ export default function Characters(props) {
     </CharacterPageWrapper>
   );
 }
-

@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import placeholder from '../../../assets/stormtrooper.jpeg';
 
-export default function CharactersCard({ character, ...props }) {
-  const { name, image, id, starships } = character;
+export default function StarshipCard({ starship, ...props }) {
+  const { name, image, id} = starship;
 
   const characterImage = image || placeholder;
 
@@ -12,7 +12,7 @@ export default function CharactersCard({ character, ...props }) {
 
     const location = {
       pathname: `/characters/${id}`,
-      state: { character: character },
+      state: { character: starship },
     };
     props.history.push(location);
   };
@@ -20,7 +20,7 @@ export default function CharactersCard({ character, ...props }) {
   return (
     <StyledCard onClick={onClickHandler}>
       <StyledImageWrapper>
-        <StyledImage src={characterImage} alt="Character image" />
+        <StyledImage src={characterImage} alt="Starship image" />
       </StyledImageWrapper>
       <StyledContentWrapper>
         <StyledName>{name}</StyledName>
@@ -40,44 +40,60 @@ const StyledCard = styled.a`
   border-radius: 7px;
   overflow: hidden;
   width: 100%;
+  /* max-height: 115px;
+  height: 100%; */
+
+  margin: 1rem auto;
   cursor: pointer;
 
   @media (max-width: 1000px) {
-    width: 80%;
-    margin: auto;
+    margin: 1rem auto;
   }
 `;
 
 const StyledImageWrapper = styled.div`
-  flex: 0 0 33%;
+  flex: 0 0 15%;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 
-  &::after {
+  width: auto;
+  height: 70px;
+
+  /* &::after {
     display: block;
     content: '';
     padding-top: 100%;
-  }
+  } */
 `;
 
 const StyledImage = styled.img`
   display: block;
-  position: absolute;
+  height: 100%
+  /* position: absolute;
   left: 0;
-  right: 0;
-  width: auto;
-  height: 100%;
+  right: 0; */
+  /* width: auto;
+  height: 100%; */
 `;
 
 const StyledContentWrapper = styled.div`
-  flex: 0 1 65%;
+  flex: 1 1 65%;
   padding: 0.5rem;
   text-align: center;
 `;
 
 const StyledName = styled.div`
   color: ${props => props.theme.cards.title.color};
-  font-size: 1.1rem;
-  /* font-weight: 600; */
-  font-family: 'SfDistantGalaxy';
+  font-size: 1.8rem;
+  font-weight: 900;
+  /* font-family: 'SfDistantGalaxy'; */
+
+  @media (max-width: 1000px){
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 768px){
+    font-size: 1rem;
+  }
+
 `;

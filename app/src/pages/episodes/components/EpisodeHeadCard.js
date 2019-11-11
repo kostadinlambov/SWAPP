@@ -31,6 +31,7 @@ const StyledCard = styled.div`
   margin: 2rem auto;
 
   @media (max-width: 600px) {
+    flex-direction: column;
     margin: 1rem auto;
     width: 100%;
   }
