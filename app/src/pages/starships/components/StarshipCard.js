@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import placeholder from '../../../assets/stormtrooper.jpeg';
 
 export default function StarshipCard({ starship, ...props }) {
+  debugger;
+  console.log('starship: ', starship)
   const { name, image, id} = starship;
 
   const characterImage = image || placeholder;
@@ -11,8 +13,8 @@ export default function StarshipCard({ starship, ...props }) {
     e.preventDefault();
 
     const location = {
-      pathname: `/characters/${id}`,
-      state: { character: starship },
+      pathname: `/starships/${id}`,
+      state: { starship: starship },
     };
     props.history.push(location);
   };

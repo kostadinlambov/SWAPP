@@ -1,31 +1,41 @@
 import React from 'react';
 import styled from 'styled-components';
-import CharacterCard from './../components/CharacterCard';
-import StarshipCard from './../../starships/components/StarshipCard';
+import { useParams } from 'react-router-dom';
+import StarshipCard from './../components/StarshipCard';
+import StarshipMainCard from './../components/StarshipMainCard';
+import RadarChartComponent from './../components/RadarChartComponent';
 
-export default function CharacterPreview(props) {
-  const character = props.history.location.state.character;
-  const { name, starships } = character;
-  
+export default function StarshipPreview(props) {
+  debugger;
+  const { starshipId } = useParams();
+  const starship = props.location.state.starship;
+  debugger;
+  const { name, model, id } = starship;
+
+  // const onClickHandler = e => {
+  //   e.preventDefault();
+
+  //   const location = {
+  //     pathname: `/starships/${starshipId}`,
+  //     state: { character: character },
+  //   };
+  //   props.history.push(location);
+  // };
+
   return (
     <StyledCharacterPageContainer>
       <StyledCharacterTitle>{name}</StyledCharacterTitle>
+      <StyledStarshipSubTitle>({model})</StyledStarshipSubTitle>
       <StyledCharacterBodyContainer>
         <StyledLeftSideContainer>
-          <CharacterCard character={character} {...props} />
+          <StarshipMainCard starship={starship} {...props} />
         </StyledLeftSideContainer>
         <StyledRightSideContainer>
-          <StyledStarshipTitle>Piloted Starships</StyledStarshipTitle>
+          <StyledStarshipTitle>
+            Compared to Starship Class Max
+          </StyledStarshipTitle>
           <StyledStarshipsContainer>
-            {starships.edges.map(starship => {
-              return (
-                <StarshipCard
-                  key={starship.node.id}
-                  starship={starship.node}
-                  {...props}
-                />
-              );
-            })}
+            <RadarChartComponent />
           </StyledStarshipsContainer>
         </StyledRightSideContainer>
       </StyledCharacterBodyContainer>
@@ -64,6 +74,25 @@ const StyledCharacterBodyContainer = styled.div`
 const StyledCharacterTitle = styled.div`
   color: ${props => props.theme.cards.title.color};
   font-size: 2rem;
+  font-weight: 900;
+  margin: 0 auto 0.2rem;
+  line-height: 1;
+  width: 80%;
+  text-align: center;
+
+  @media (max-width: 1000px) {
+    font-size: 1.6rem;
+    margin: 0 auto 1rem;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+  }
+`;
+
+const StyledStarshipSubTitle = styled.div`
+  color: ${props => props.theme.cards.subtitle.color};
+  font-size: 1.6rem;
   font-weight: 900;
   margin: 0 auto 2rem;
   line-height: 1;
@@ -110,6 +139,7 @@ const StyledRightSideContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  
 
   /* @media (max-width: 1000px) {
     width: 60%;
@@ -135,7 +165,7 @@ const StyledStarshipsContainer = styled.div`
 const StyledStarshipTitle = styled.div`
   font-family: 'SfDistantGalaxy';
   color: ${props => props.theme.cards.subtitle.color};
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   /* font-weight: 900; */
   margin: auto;
   line-height: 1;

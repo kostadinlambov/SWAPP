@@ -5,7 +5,7 @@ import Episodes from './episodes/pages/Episodes';
 import EpisodesPreview from './episodes/pages/EpisodesPreview';
 import Characters from './characters/pages/Characters';
 import CharacterPreview from './characters/pages/CharacterPreview';
-import StrarshipPreview from './starships/components/StarshipPreview';
+import StrarshipPreview from './starships/pages/StarshipPreview';
 
 const Pages = () => {
   return (

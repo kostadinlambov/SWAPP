@@ -31,6 +31,13 @@ const FETCH_ALL_CHARACTERS = gql`
                 id
                 name
                 image
+                model
+                starshipClass
+                cost
+                maxAtmosphericSpeed
+                maxMLPerHour
+                hyperdriveRating
+                crew
               }
             }
           }
@@ -51,7 +58,6 @@ export default function Characters(props) {
     variables: { first: 12 },
     // fetchPolicy: 'cache-first'
   });
- 
 
   if (loading) return <Loading />;
   if (error) {

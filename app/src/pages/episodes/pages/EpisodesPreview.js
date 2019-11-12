@@ -43,6 +43,13 @@ const FETCH_EPISODE = gql`
                   id
                   name
                   image
+                  model
+                  starshipClass
+                  cost
+                  maxAtmosphericSpeed
+                  maxMLPerHour
+                  hyperdriveRating
+                  crew
                 }
               }
             }
@@ -96,7 +103,7 @@ export default function EpisodesPreview(props) {
   const pageInfo = people['pageInfo'];
 
   const { endCursor, hasNextPage } = pageInfo;
-  
+
   const onLoadMore = () => {
     fetchMore({
       variables: { first: 5, after: endCursor },
@@ -123,7 +130,7 @@ export default function EpisodesPreview(props) {
     });
   };
 
-return (
+  return (
     <EpisodeContainer>
       <EpisodeHeadCard episodeId={episodeId} title={title} image={image} />
       <EpisodeDescriprionCard
