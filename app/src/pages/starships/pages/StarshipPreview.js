@@ -1,9 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/react-hooks';
 import StarshipCard from './../components/StarshipCard';
 import StarshipMainCard from './../components/StarshipMainCard';
 import RadarChartComponent from './../components/RadarChartComponent';
+import gql from 'graphql-tag';
+import { Loading } from '../../../components/Loading';
+import ErrorMessage from '../../../components/ErrorMessage';
+import { Minimatch } from 'minimatch';
+
+const StarshipStats_QUERY = gql`
+  query StarshipStats($starshipClass: String) {
+    allStarships(first: 100, filter: { starshipClass: $starshipClass }) {
+      totalCount
+      edges {
+        node {
+          cost
+          maxAtmosphericSpeed
+          crew
+          hyperdriveRating
+          maxMLPerHour
+        }
+      }
+    }
+  }
+`;
 
 export default function StarshipPreview(props) {
   debugger;
@@ -12,15 +34,35 @@ export default function StarshipPreview(props) {
   debugger;
   const { name, model, id } = starship;
 
-  // const onClickHandler = e => {
-  //   e.preventDefault();
+  const { data, loading, error } = useQuery(StarshipStats_QUERY, {
+    variables: { starshipClass: starship.starshipClass },
+  });
 
-  //   const location = {
-  //     pathname: `/starships/${starshipId}`,
-  //     state: { character: character },
-  //   };
-  //   props.history.push(location);
-  // };
+  if (loading) return <Loading />;
+  if (error) {
+    let errorMessage = error.message;
+
+    if (errorMessage.startsWith('GraphQL error:')) {
+      errorMessage = errorMessage.split(':')[1].trim();
+    }
+
+    return (
+      <ErrorMessage textAlingn={'center'} margin={'4rem 0 0 0'}>
+        {errorMessage}
+      </ErrorMessage>
+    );
+  }
+
+  console.log('data: ', data);
+  debugger;
+
+  const allStarships = data['allStarships']['edges'];
+  debugger;
+
+  calculateRadarChartInput(allStarships, starship);
+
+  console.log('data: ', data);
+  debugger;
 
   return (
     <StyledCharacterPageContainer>
@@ -35,13 +77,44 @@ export default function StarshipPreview(props) {
             Compared to Starship Class Max
           </StyledStarshipTitle>
           <StyledStarshipsContainer>
-            <RadarChartComponent />
+            <RadarChartComponent starship={starship} {...props} />
           </StyledStarshipsContainer>
         </StyledRightSideContainer>
       </StyledCharacterBodyContainer>
     </StyledCharacterPageContainer>
   );
 }
+
+const calculateRadarChartInput = (allStarships, starship) => {
+ let { cost,
+  maxAtmosphericSpeed,
+  crew ,
+  hyperdriveRating ,
+  maxMLPerHour} =  starship
+ 
+  
+  const costArr = [];
+  const maxAtmosphericSpeedArr = [];
+  const crewArr = [];
+  const hyperdriveRatingArr = [];
+  const maxMLPerHourArr = [];
+
+  allStarships.forEach(currentStarship => {
+    costArr.push(currentStarship.node.cost || 0);
+    maxAtmosphericSpeedArr.push(currentStarship.node.maxAtmosphericSpeed || 0);
+    crewArr.push(currentStarship.node.crew || 0);
+    hyperdriveRatingArr.push(currentStarship.node.hyperdriveRating || 0);
+    maxMLPerHourArr.push(currentStarship.node.maxMLPerHour || 0);
+  });
+  debugger;
+  cost =  cost /(Math.max(...costArr) - Math.min(...costArr));
+  maxAtmosphericSpeed =  maxAtmosphericSpeed /(Math.max(...maxAtmosphericSpeedArr) - Math.min(...maxAtmosphericSpeedArr));
+  crew = crew / (Math.max(...crewArr) - Math.min(...crewArr));
+  hyperdriveRating = hyperdriveRating / (Math.max(...hyperdriveRatingArr) - Math.min(...hyperdriveRatingArr));
+  maxMLPerHour = maxMLPerHour / (Math.max(...maxMLPerHourArr) - Math.min(...maxMLPerHourArr)) ;
+
+  debugger;
+};
 
 // Styled Components
 const StyledCharacterPageContainer = styled.div`
@@ -139,7 +212,6 @@ const StyledRightSideContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  
 
   /* @media (max-width: 1000px) {
     width: 60%;
@@ -160,6 +232,22 @@ const StyledRightSideContainer = styled.div`
 const StyledStarshipsContainer = styled.div`
   padding-top: 1rem;
   border-top: 1px solid #abb1ba;
+  margin: auto;
+
+  @media (max-width: 700px) {
+    width: 61vw;
+    height: 62vh;
+  }
+
+  @media (min-width: 700px) {
+    width: 28vw;
+    height: 19vh;
+  }
+
+  @media (min-width: 980px) {
+    width: 30vw;
+    height: 62vh;
+  }
 `;
 
 const StyledStarshipTitle = styled.div`

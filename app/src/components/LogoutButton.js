@@ -7,8 +7,8 @@ export default function LogoutButton() {
 
   const onLogoutHandler = () => {
     localStorage.clear();
+    client.cache.reset();
     client.writeData({ data: { isLoggedIn: false } });
-    // client.clearStore();
   };
 
   return (

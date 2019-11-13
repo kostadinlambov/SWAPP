@@ -1,55 +1,126 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
-// import RadarChart from 'react-svg-radar-chart';
-import 'react-svg-radar-chart/build/css/index.css';
+import { ResponsiveRadar } from '@nivo/radar';
 
-import { Radar } from 'react-chartjs-2';
+export default function  RadarChartComponent(props){
+  console.log(props)
+  debugger;
 
-export default function RadarChartComponent(props) {
-  // const data = [
-  //   {
-  //     data: {
-  //       battery: 0.7,
-  //       design: 0.8,
-  //       useful: 0.9,
-  //       speed: 0.67,
-  //       weight: 0.8,
+ const data =  [
+  {
+    "taste": "fruity",
+    "chardonay": 49,
+    "carmenere": 47,
+    "syrah": 103
+  },
+  {
+    "taste": "bitter",
+    "chardonay": 51,
+    "carmenere": 90,
+    "syrah": 75
+  },
+  {
+    "taste": "heavy",
+    "chardonay": 100,
+    "carmenere": 47,
+    "syrah": 105
+  },
+  {
+    "taste": "strong",
+    "chardonay": 102,
+    "carmenere": 24,
+    "syrah": 48
+  },
+  {
+    "taste": "sunny",
+    "chardonay": 27,
+    "carmenere": 58,
+    "syrah": 109
+  }
+]
+
+  // const [metrics, setMetrics] = useState([]);
+
+  // const primaryHeadingFontColor = 'blue';
+  // const data = 'blue';''
+
+  // useEffect(() => {
+  //   setMetrics(data);
+  // }, [data]);
+
+  // const theme = {
+  //   tooltip: {
+  //     container: {
+  //       background: '#FFF',
+  //       color: '#000',
+  //       boxShadow: '0 3px 9px rgba(0, 0, 0, 0.5)',
+  //       fontFamily: 'sf-distant-galaxy',
+  //       fontSize: 10,
   //     },
-  //     meta: { color: 'blue' },
   //   },
-  //   ,
-  // ];
-
-  const data = {
-    labels: ['Max Atm. Speed', 'Max ML/h', 'HyperD Rat.', 'Crew', 'Cost'],
-    datasets: [0.6, 0.85, 0.5, 0.6, 0.7],
-  };
-
-  const captions = {
-    // columns
-    battery: 'Max Atm. Speed',
-    design: 'Max ML/h',
-    useful: 'HyperD Rat.',
-    speed: 'Crew',
-    weight: 'Cost',
-  };
-
-  const options = {
-    scales: 8,
-    dots: true,
-    'background-color': 'red',
-  };
+  //   gridLabel: {
+  //     color: '#000',
+  //   },
+  // };
 
   return (
-    <StyledChartWrapper>
-      <Radar data={data} options={options} />
-    </StyledChartWrapper>
+   
+    <ResponsiveRadar
+        data={data}
+        keys={[ 'chardonay', 'carmenere', 'syrah' ]}
+        indexBy="taste"
+        maxValue="auto"
+        margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
+        curve="linearClosed"
+        borderWidth={2}
+        borderColor={{ from: 'color' }}
+        gridLevels={5}
+        gridShape="circular"
+        gridLabelOffset={36}
+        enableDots={true}
+        dotSize={10}
+        dotColor={{ theme: 'background' }}
+        dotBorderWidth={2}
+        dotBorderColor={{ from: 'color' }}
+        enableDotLabel={true}
+        dotLabel="value"
+        dotLabelYOffset={-12}
+        colors={{ scheme: 'nivo' }}
+        fillOpacity={0.25}
+        blendMode="multiply"
+        animate={true}
+        motionStiffness={90}
+        motionDamping={15}
+        isInteractive={true}
+        legends={[
+            {
+                anchor: 'top-left',
+                direction: 'column',
+                translateX: -50,
+                translateY: -40,
+                itemWidth: 80,
+                itemHeight: 20,
+                itemTextColor: '#999',
+                symbolSize: 12,
+                symbolShape: 'circle',
+                effects: [
+                    {
+                        on: 'hover',
+                        style: {
+                            itemTextColor: '#000'
+                        }
+                    }
+                ]
+            }
+        ]}
+    />
   );
-}
+};
 
-const StyledChartWrapper = styled.div`
-  margin: auto;
-  text-align: center;
-  background-color: lightblue;
-`;
+// RadarChart.propTypes = {
+//   theme: PropTypes.object.isRequired,
+//   primaryHeadingFontColor: PropTypes.string,
+//   data: PropTypes.any,
+// };
+

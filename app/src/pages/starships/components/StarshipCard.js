@@ -86,7 +86,7 @@ const StyledContentWrapper = styled.div`
 
 const StyledName = styled.div`
   color: ${props => props.theme.cards.title.color};
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 900;
   /* font-family: 'SfDistantGalaxy'; */
 

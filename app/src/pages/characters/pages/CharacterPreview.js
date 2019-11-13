@@ -50,7 +50,7 @@ const StyledCharacterBodyContainer = styled.div`
   align-items: flex-start;
   margin: auto;
   padding: 2rem 0;
-  border-top: 1px solid #000;
+  border-top: 1px solid #ABB1BA;
 
   @media (max-width: 1000px) {
     flex-direction: column;
@@ -129,13 +129,13 @@ const StyledRightSideContainer = styled.div`
 
 const StyledStarshipsContainer = styled.div`
   padding-top: 1rem;
-  border-top: 1px solid #abb1ba;
+  border-top: 1px solid #ABB1BA;
 `;
 
 const StyledStarshipTitle = styled.div`
   font-family: 'SfDistantGalaxy';
   color: ${props => props.theme.cards.subtitle.color};
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   /* font-weight: 900; */
   margin: auto;
   line-height: 1;

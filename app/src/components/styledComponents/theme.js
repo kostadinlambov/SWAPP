@@ -9,7 +9,7 @@ export const light = {
             'color': '#4BD5EE',
         },
         'subtitle':{
-            'color': '#000',
+            'color': '#ABB1BA',
         }
     },
     'solidButton': {
@@ -62,7 +62,7 @@ export const light = {
 
 export const dark = {
     backgroundColor: '#000',
-    'color': '#abb1ba',
+    'color': '#ABB1BA',
     'cards': {
         'borderColor': '#3C4858',
         'backgroundColor': '#333',

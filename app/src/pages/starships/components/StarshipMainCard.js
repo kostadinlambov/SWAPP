@@ -19,16 +19,6 @@ export default function StarshipMainCard({ starship, ...props }) {
 
   const starshipImage = image || placeholder;
 
-  // const onClickHandler = e => {
-  //   e.preventDefault();
-
-  //   const location = {
-  //     pathname: `/characters/${id}`,
-  //     state: { character: character },
-  //   };
-  //   props.history.push(location);
-  // };
-
   return (
     <StyledCard>
       <StyledTitle>{name}</StyledTitle>
@@ -38,19 +28,19 @@ export default function StarshipMainCard({ starship, ...props }) {
 
       <StyledContentWrapper>
         <StyledDescriptionWrapper>
-          Class: <StyledSpan> {starshipClass}</StyledSpan>
+          Class: <StyledSpan> {starshipClass || ''}</StyledSpan>
         </StyledDescriptionWrapper>
         <StyledDescriptionWrapper>
-          Cost: <StyledSpan> {cost} credits</StyledSpan>
+          Cost: <StyledSpan> {cost || 0} credits</StyledSpan>
         </StyledDescriptionWrapper>
         <StyledDescriptionWrapper>
-          Crew: <StyledSpan> {crew}</StyledSpan>
+          Crew: <StyledSpan> {crew || ''}</StyledSpan>
         </StyledDescriptionWrapper>
         <StyledDescriptionWrapper>
-          Max Atmospheric Speed: <StyledSpan> {maxAtmosphericSpeed}</StyledSpan>
+          Max Atmospheric Speed: <StyledSpan> {maxAtmosphericSpeed || ''}</StyledSpan>
         </StyledDescriptionWrapper>
         <StyledDescriptionWrapper>
-          Hyperdrive Rating: <StyledSpan> {hyperdriveRating}</StyledSpan>
+          Hyperdrive Rating: <StyledSpan> {hyperdriveRating || ''}</StyledSpan>
         </StyledDescriptionWrapper>
       </StyledContentWrapper>
     </StyledCard>
