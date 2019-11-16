@@ -28,10 +28,8 @@ const StarshipStats_QUERY = gql`
 `;
 
 export default function StarshipPreview(props) {
-  debugger;
   const { starshipId } = useParams();
   const starship = props.location.state.starship;
-  debugger;
   const { name, model, id } = starship;
 
   const { data, loading, error } = useQuery(StarshipStats_QUERY, {
@@ -54,15 +52,12 @@ export default function StarshipPreview(props) {
   }
 
   console.log('data: ', data);
-  debugger;
 
   const allStarships = data['allStarships']['edges'];
-  debugger;
 
-  calculateRadarChartInput(allStarships, starship);
+  const radarData = calculateRadarChartInput(allStarships, starship);
 
   console.log('data: ', data);
-  debugger;
 
   return (
     <StyledCharacterPageContainer>
@@ -77,7 +72,13 @@ export default function StarshipPreview(props) {
             Compared to Starship Class Max
           </StyledStarshipTitle>
           <StyledStarshipsContainer>
-            <RadarChartComponent starship={starship} {...props} />
+            <StyledRadarWrapper>
+              <RadarChartComponent
+                starship={starship}
+                data={radarData}
+                {...props}
+              />
+            </StyledRadarWrapper>
           </StyledStarshipsContainer>
         </StyledRightSideContainer>
       </StyledCharacterBodyContainer>
@@ -86,13 +87,14 @@ export default function StarshipPreview(props) {
 }
 
 const calculateRadarChartInput = (allStarships, starship) => {
- let { cost,
-  maxAtmosphericSpeed,
-  crew ,
-  hyperdriveRating ,
-  maxMLPerHour} =  starship
- 
-  
+  let {
+    cost,
+    maxAtmosphericSpeed,
+    crew,
+    hyperdriveRating,
+    maxMLPerHour,
+  } = starship;
+
   const costArr = [];
   const maxAtmosphericSpeedArr = [];
   const crewArr = [];
@@ -100,20 +102,73 @@ const calculateRadarChartInput = (allStarships, starship) => {
   const maxMLPerHourArr = [];
 
   allStarships.forEach(currentStarship => {
-    costArr.push(currentStarship.node.cost || 0);
-    maxAtmosphericSpeedArr.push(currentStarship.node.maxAtmosphericSpeed || 0);
-    crewArr.push(currentStarship.node.crew || 0);
-    hyperdriveRatingArr.push(currentStarship.node.hyperdriveRating || 0);
-    maxMLPerHourArr.push(currentStarship.node.maxMLPerHour || 0);
+    currentStarship.node.cost && costArr.push(currentStarship.node.cost);
+    currentStarship.node.maxAtmosphericSpeed &&
+      maxAtmosphericSpeedArr.push(currentStarship.node.maxAtmosphericSpeed);
+    currentStarship.node.crew && crewArr.push(currentStarship.node.crew);
+    currentStarship.node.hyperdriveRating &&
+      hyperdriveRatingArr.push(currentStarship.node.hyperdriveRating);
+    currentStarship.node.maxMLPerHour &&
+      maxMLPerHourArr.push(currentStarship.node.maxMLPerHour);
+    // costObj = {costObj , cost:(currentStarship.node.cost || 0)}
+    // maxAtmosphericSpeedObj = {maxAtmosphericSpeedObj , cost:(currentStarship.node.maxAtmosphericSpeed || 0)}
+    // crewObj = {crewObj , cost:(currentStarship.node.crew || 0)}
+    // hyperdriveRatingObj = {hyperdriveRatingObj , cost:(currentStarship.node.hyperdriveRating || 0)}
+    // maxMLPerHourObj = {maxMLPerHourObj , cost:(currentStarship.node.maxMLPerHour || 0)}
   });
-  debugger;
-  cost =  cost /(Math.max(...costArr) - Math.min(...costArr));
-  maxAtmosphericSpeed =  maxAtmosphericSpeed /(Math.max(...maxAtmosphericSpeedArr) - Math.min(...maxAtmosphericSpeedArr));
-  crew = crew / (Math.max(...crewArr) - Math.min(...crewArr));
-  hyperdriveRating = hyperdriveRating / (Math.max(...hyperdriveRatingArr) - Math.min(...hyperdriveRatingArr));
-  maxMLPerHour = maxMLPerHour / (Math.max(...maxMLPerHourArr) - Math.min(...maxMLPerHourArr)) ;
 
-  debugger;
+  // const radarData = [{...costObj}, {...maxAtmosphericSpeedObj}, {...crewObj}, {...hyperdriveRatingObj}, {...maxMLPerHourObj}]
+
+  // const radarData = allStarships.reduce((acc, currentStarship) => {
+  //     return currentStarship === null ? [...acc, 0] : [...acc, currentStarship.node];
+  // }, []);
+
+  cost =
+    (cost - Math.min(...costArr)) /
+    (Math.max(...costArr) - Math.min(...costArr));
+  maxAtmosphericSpeed =
+    (maxAtmosphericSpeed - Math.min(...maxAtmosphericSpeedArr)) /
+    (Math.max(...maxAtmosphericSpeedArr) - Math.min(...maxAtmosphericSpeedArr));
+  crew =
+    (crew - Math.min(...crewArr)) /
+    (Math.max(...crewArr) - Math.min(...crewArr));
+  hyperdriveRating =
+    (hyperdriveRating - Math.min(...hyperdriveRatingArr)) /
+    (Math.max(...hyperdriveRatingArr) - Math.min(...hyperdriveRatingArr));
+  maxMLPerHour =
+    (maxMLPerHour - Math.min(...maxMLPerHourArr)) /
+    (Math.max(...maxMLPerHourArr) - Math.min(...maxMLPerHourArr));
+
+  // let costObj = { label: 'cost',  cost: cost *100 };
+  // let maxAtmosphericSpeedObj = { label: 'maxAtmosphericSpeed', maxAtmosphericSpeed: maxAtmosphericSpeed*100 };
+  // let crewObj = { label: 'crew', crew: crew*100 };
+  // let hyperdriveRatingObj = { label: 'hyperdriveRating', hyperdriveRating: hyperdriveRating*100 };
+  // let maxMLPerHourObj = { label: 'maxMLPerHour', maxMLPerHour: maxMLPerHour*100 };
+
+  let costObj = { label: 'cost', cost: cost * 100 };
+  let maxAtmosphericSpeedObj = {
+    label: 'maxAtmosphericSpeed',
+    maxAtmosphericSpeed: maxAtmosphericSpeed * 100,
+  };
+  let crewObj = { label: 'crew', crew: crew * 100 };
+  let hyperdriveRatingObj = {
+    label: 'hyperdriveRating',
+    hyperdriveRating: hyperdriveRating * 100,
+  };
+  let maxMLPerHourObj = {
+    label: 'maxMLPerHour',
+    maxMLPerHour: maxMLPerHour * 100,
+  };
+
+  // const radarData = [costObj, maxAtmosphericSpeedObj, crewObj, hyperdriveRatingObj, maxMLPerHourObj];
+  const radarData = [
+    costObj,
+    maxAtmosphericSpeedObj,
+    crewObj,
+    hyperdriveRatingObj,
+    maxMLPerHourObj,
+  ];
+  return radarData;
 };
 
 // Styled Components
@@ -123,7 +178,7 @@ const StyledCharacterPageContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin: 3rem auto;
+  margin: 5rem auto;
 `;
 
 const StyledCharacterBodyContainer = styled.div`
@@ -132,8 +187,8 @@ const StyledCharacterBodyContainer = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   margin: auto;
-  padding: 2rem 0;
-  border-top: 1px solid #000;
+  padding: 2rem 0 1rem;
+  border-top: 1px solid #ABB1BA;
 
   @media (max-width: 1000px) {
     flex-direction: column;
@@ -141,6 +196,7 @@ const StyledCharacterBodyContainer = styled.div`
     align-items: center;
     width: 100%;
     margin: auto;
+    max-width: 350px;
   }
 `;
 
@@ -184,6 +240,7 @@ const StyledStarshipSubTitle = styled.div`
 
 const StyledLeftSideContainer = styled.div`
   flex: 0 1 40%;
+  max-width: 350px;
 
   @media (max-width: 1000px) {
     flex-direction: column;
@@ -229,26 +286,57 @@ const StyledRightSideContainer = styled.div`
   }
 `;
 
+
 const StyledStarshipsContainer = styled.div`
-  padding-top: 1rem;
-  border-top: 1px solid #abb1ba;
+  flex: 0 1 55%;
+  /* width: 42vw;
+  height: 42vh; */
+   width: 100%;
+  height: 350px;
   margin: auto;
 
-  @media (max-width: 700px) {
-    width: 61vw;
-    height: 62vh;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
 
-  @media (min-width: 700px) {
-    width: 28vw;
-    height: 19vh;
-  }
+  padding-top: 1rem;
+  border-top: 1px solid #ABB1BA;
 
-  @media (min-width: 980px) {
-    width: 30vw;
-    height: 62vh;
+  @media (max-width: 1000px) {
+    max-width: 350px;
+    /* font-size: 1.4rem; */
+    width: 100%;
+    height: 280px;
+    margin: auto;
   }
 `;
+
+const StyledRadarWrapper = styled.div`
+  /* width: 42vw;
+  height: 42vh; */
+  width: 100%;
+  height: 100%;
+  margin: auto;
+
+
+  /* @media (max-width: 1000px) {
+    width: 60%;
+    margin: auto;
+  } */
+
+  /* @media (max-width: 1000px) {
+    max-width: 350px;
+    font-size: 1.4rem;
+    width: 250px;
+    height: 250px;
+    margin: auto;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  } */
+`
 
 const StyledStarshipTitle = styled.div`
   font-family: 'SfDistantGalaxy';

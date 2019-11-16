@@ -113,7 +113,20 @@ const FormWrapper = styled.div`
   width: 40%;
   margin: auto;
   padding: 0 1rem 1rem;
-  margin-top: 2rem;
+  margin: 3rem auto;
+  @media (max-width: 1200px) {
+    width: 50%;
+    margin: 3rem auto;
+  }
+
+  @media (max-width: 768px) {
+    width: 60%;
+  }
+
+  @media (max-width: 600px) {
+    width: 80%;
+    margin: 3rem auto;
+  }
 `;
 
 const FormElementsWrapper = styled.div`

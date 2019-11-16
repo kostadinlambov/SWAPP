@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
+import { useApolloClient } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { Loading } from '../../../components/Loading';
 import ErrorMessage from '../../../components/ErrorMessage';
@@ -10,7 +11,6 @@ import EpisodeDescriprionCard from './../components/EpisodeDescriprionCard';
 import { StyledButton } from './../../../components/styledComponents/StyledButton';
 import CharactersCard from './../../characters/components/CharactersCard';
 import { CharactersContainer } from './../../../components/styledComponents/CharactersContainer';
-import { CharacterPageWrapper } from './../../../components/styledComponents/CharacterPageWrapper';
 
 const FETCH_EPISODE = gql`
   query episode($id: ID!, $after: String, $first: Int!) {
@@ -68,10 +68,25 @@ const FETCH_EPISODE = gql`
 
 export default function EpisodesPreview(props) {
   const { episodeId: filmId } = useParams();
+  const client = useApolloClient();
+  const [characters, setCharacters] = useState([]);
 
   const { data, loading, error, fetchMore } = useQuery(FETCH_EPISODE, {
     variables: { id: filmId, first: 5 },
   });
+
+  useEffect(() => {
+    if (data) {
+      const allCharacters = people['edges'] || [];
+      setCharacters(allCharacters);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    return () => {
+      client.cache.reset();
+    };
+  }, []);
 
   if (loading) return <Loading />;
   if (error) {
@@ -99,7 +114,7 @@ export default function EpisodesPreview(props) {
     people,
   } = data.episode;
 
-  const allCharacters = people['edges'];
+  
   const pageInfo = people['pageInfo'];
 
   const { endCursor, hasNextPage } = pageInfo;
@@ -109,7 +124,7 @@ export default function EpisodesPreview(props) {
       variables: { first: 5, after: endCursor },
       updateQuery: (prev, { fetchMoreResult: { episode } }) => {
         const people = episode.people;
-        debugger;
+
         if (!people.edges.length) {
           return prev;
         }
@@ -139,9 +154,9 @@ export default function EpisodesPreview(props) {
         releaseDate={releaseDate}
       />
 
-      <CharacterPageWrapper>
+      <CharacterWrapper>
         <CharactersContainer>
-          {allCharacters.map(character => {
+          {characters.map(character => {
             return (
               <CharactersCard
                 key={character.node.id}
@@ -154,7 +169,7 @@ export default function EpisodesPreview(props) {
         {hasNextPage && (
           <StyledButton onClick={onLoadMore}>Load More</StyledButton>
         )}
-      </CharacterPageWrapper>
+      </CharacterWrapper>
     </EpisodeContainer>
   );
 }
@@ -166,5 +181,24 @@ const EpisodeContainer = styled.section`
   justify-content: flex-start;
   align-items: center;
   max-width: 80%;
-  margin: auto;
+  margin: 4rem auto 1rem;
+`;
+
+const CharacterWrapper = styled.div`
+  margin-top: 1rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  width: 100%;
+
+  @media (max-width: 1000px) {
+    margin: 1rem 0 1rem;
+  }
+
+  @media (max-width: 768px) {
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+    margin: 0rem auto 1rem;
+  }
 `;

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import placeholder from '../../../assets/stormtrooper.jpeg';
 
 export default function StarshipMainCard({ starship, ...props }) {
-  debugger;
   const {
     id,
     name,

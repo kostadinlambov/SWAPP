@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import placeholder from '../../../assets/stormtrooper.jpeg';
 
 export default function StarshipCard({ starship, ...props }) {
-  debugger;
   console.log('starship: ', starship)
   const { name, image, id} = starship;
 

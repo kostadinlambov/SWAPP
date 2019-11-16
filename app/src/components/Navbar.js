@@ -44,6 +44,11 @@ export default NavbarComponent;
 
 // Styled Components
 const Styles = styled.div`
+position:fixed;
+left: 0;
+right: 0;
+top: 0;
+z-index: 5;
 .navbar{
   background-color: ${props => props.theme.appBar.backgroundColor};
   border-color: ${props => props.theme.appBar.borderColor};

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useQuery } from '@apollo/react-hooks';
+import { useApolloClient } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import { Loading } from '../../../components/Loading';
 import ErrorMessage from '../../../components/ErrorMessage';
-import styled from 'styled-components';
 import CharactersCard from './../components/CharactersCard';
 import { StyledButton } from './../../../components/styledComponents/StyledButton';
 import { CharactersContainer } from './../../../components/styledComponents/CharactersContainer';
@@ -54,10 +54,26 @@ const FETCH_ALL_CHARACTERS = gql`
 `;
 
 export default function Characters(props) {
+  const client = useApolloClient();
+  const [characters, setCharacters] = useState([]);
+
   const { data, loading, error, fetchMore } = useQuery(FETCH_ALL_CHARACTERS, {
     variables: { first: 12 },
-    // fetchPolicy: 'cache-first'
   });
+
+  useEffect(() => {
+    if(data){
+      const allCharacters = data['allPeople']['edges'] || [] ;
+      setCharacters(allCharacters)
+    }
+    
+  }, [data]);
+
+  useEffect(() => {
+    return() => {
+      client.cache.reset();
+    }
+  }, []);
 
   if (loading) return <Loading />;
   if (error) {
@@ -74,8 +90,7 @@ export default function Characters(props) {
     );
   }
 
-  const allCharacters = data['allPeople']['edges'];
-  const pageInfo = data['allPeople']['pageInfo'];
+  const pageInfo = data['allPeople']['pageInfo'] ;
 
   const { endCursor, hasNextPage } = pageInfo;
 
@@ -103,7 +118,7 @@ export default function Characters(props) {
   return (
     <CharacterPageWrapper>
       <CharactersContainer>
-        {allCharacters.map(character => {
+        {characters.map(character => {
           return (
             <CharactersCard
               key={character.node.id}

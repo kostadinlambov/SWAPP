@@ -42,8 +42,13 @@ const StyledCard = styled.a`
   width: 100%;
   cursor: pointer;
 
-  @media (max-width: 1000px) {
+  /* @media (max-width: 1000px) {
     width: 80%;
+    margin: auto;
+  } */
+
+  @media (max-width: 1000px) {
+    width: 100%;
     margin: auto;
   }
 `;

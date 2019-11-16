@@ -40,7 +40,7 @@ const StyledCharacterPageContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin: 3rem auto;
+  margin: 5rem auto 1rem;
 `;
 
 const StyledCharacterBodyContainer = styled.div`
@@ -49,7 +49,7 @@ const StyledCharacterBodyContainer = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   margin: auto;
-  padding: 2rem 0;
+  padding: 2rem 0 1rem;
   border-top: 1px solid #ABB1BA;
 
   @media (max-width: 1000px) {
@@ -58,6 +58,7 @@ const StyledCharacterBodyContainer = styled.div`
     align-items: center;
     width: 100%;
     margin: auto;
+    max-width: 350px;
   }
 `;
 
@@ -82,6 +83,7 @@ const StyledCharacterTitle = styled.div`
 
 const StyledLeftSideContainer = styled.div`
   flex: 0 1 40%;
+  max-width: 350px;
 
   @media (max-width: 1000px) {
     flex-direction: column;
@@ -93,10 +95,6 @@ const StyledLeftSideContainer = styled.div`
     font-size: 1.4rem;
     width: 100%;
     margin: auto;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
   }
 
   @media (max-width: 768px) {
@@ -117,6 +115,7 @@ const StyledRightSideContainer = styled.div`
   } */
 
   @media (max-width: 1000px) {
+    max-width: 350px;
     font-size: 1.4rem;
     width: 100%;
     margin: auto;
