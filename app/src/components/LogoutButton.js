@@ -26,7 +26,7 @@ const StyledButton = styled.button`
   border-radius: 5px;
   outline: none;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   background-color: ${props => props.theme.outlinedButton.backgroundColor};
   border-color: ${props => props.theme.outlinedButton.borderColor};
   color: ${props => props.theme.outlinedButton.color};

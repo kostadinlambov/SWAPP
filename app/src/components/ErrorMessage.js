@@ -1,7 +1,4 @@
-import React from 'react';
 import styled from 'styled-components';
-
-// export const Loading = (props) => (<ErrorMessage />)
 
 const ErrorMessage = styled.div`
   color: red;

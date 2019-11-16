@@ -11,7 +11,6 @@ export default function CharacterCard({ character, ...props }) {
     id,
     mass,
     species,
-    starships,
   } = character;
 
   const characterImage = image || placeholder;

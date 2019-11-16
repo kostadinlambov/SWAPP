@@ -135,7 +135,6 @@ const StyledStarshipTitle = styled.div`
   font-family: 'SfDistantGalaxy';
   color: ${props => props.theme.cards.subtitle.color};
   font-size: 1.7rem;
-  /* font-weight: 900; */
   margin: auto;
   line-height: 1;
   width: 100%;

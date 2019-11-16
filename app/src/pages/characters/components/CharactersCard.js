@@ -42,11 +42,6 @@ const StyledCard = styled.a`
   width: 100%;
   cursor: pointer;
 
-  /* @media (max-width: 1000px) {
-    width: 80%;
-    margin: auto;
-  } */
-
   @media (max-width: 1000px) {
     width: 100%;
     margin: auto;
@@ -83,6 +78,5 @@ const StyledContentWrapper = styled.div`
 const StyledName = styled.div`
   color: ${props => props.theme.cards.title.color};
   font-size: 1.1rem;
-  /* font-weight: 600; */
   font-family: 'SfDistantGalaxy';
 `;

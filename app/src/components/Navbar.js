@@ -58,6 +58,7 @@ z-index: 5;
 .navbar-nav{
   align-items: center;
   justify-content: center;
+  font-size: 1.2rem;
 }
 
 .bg-navcolor{

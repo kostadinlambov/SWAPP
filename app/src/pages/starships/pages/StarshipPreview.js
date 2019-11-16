@@ -49,13 +49,8 @@ export default function StarshipPreview(props) {
     );
   }
 
-  console.log('data: ', data);
-
   const allStarships = data['allStarships']['edges'];
-
   const radarData = calculateRadarChartInput(allStarships, starship);
-
-  console.log('data: ', data);
 
   return (
     <StyledCharacterPageContainer>
@@ -287,8 +282,6 @@ const StyledRightSideContainer = styled.div`
 
 const StyledStarshipsContainer = styled.div`
   flex: 0 1 55%;
-  /* width: 42vw;
-  height: 42vh; */
    width: 100%;
   height: 350px;
   margin: auto;
@@ -300,10 +293,12 @@ const StyledStarshipsContainer = styled.div`
 
   padding-top: 1rem;
   border-top: 1px solid #ABB1BA;
+  background-color: ${props => props.theme.cards.backgroundColor};
+  color: ${props => props.theme.cards.color};
+
 
   @media (max-width: 1000px) {
     max-width: 350px;
-    /* font-size: 1.4rem; */
     width: 100%;
     height: 280px;
     margin: auto;
@@ -316,31 +311,12 @@ const StyledRadarWrapper = styled.div`
   width: 100%;
   height: 100%;
   margin: auto;
-
-
-  /* @media (max-width: 1000px) {
-    width: 60%;
-    margin: auto;
-  } */
-
-  /* @media (max-width: 1000px) {
-    max-width: 350px;
-    font-size: 1.4rem;
-    width: 250px;
-    height: 250px;
-    margin: auto;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
-  } */
 `
 
 const StyledStarshipTitle = styled.div`
   font-family: 'SfDistantGalaxy';
   color: ${props => props.theme.cards.subtitle.color};
   font-size: 1.3rem;
-  /* font-weight: 900; */
   margin: auto;
   line-height: 1;
   width: 100%;

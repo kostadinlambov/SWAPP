@@ -10,7 +10,7 @@ import StrarshipPreview from './starships/pages/StarshipPreview';
 const Pages = () => {
   return (
     <>
-      <Suspense>
+      <Suspense >
         <Switch>
           <Route exact path="/episodes" component={Episodes} />
           <Route

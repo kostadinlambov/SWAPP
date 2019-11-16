@@ -4,14 +4,11 @@ import placeholder from '../../../assets/stormtrooper.jpeg';
 
 export default function StarshipMainCard({ starship, ...props }) {
   const {
-    id,
     name,
     image,
-    model,
     starshipClass,
     cost,
     maxAtmosphericSpeed,
-    maxMLPerHour,
     hyperdriveRating,
     crew,
   } = starship;
@@ -24,7 +21,6 @@ export default function StarshipMainCard({ starship, ...props }) {
       <StyledImageWrapper>
         <StyledImage src={starshipImage} alt="Character image" />
       </StyledImageWrapper>
-
       <StyledContentWrapper>
         <StyledDescriptionWrapper>
           Class: <StyledSpan> {starshipClass || ''}</StyledSpan>

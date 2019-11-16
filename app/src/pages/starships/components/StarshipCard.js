@@ -41,9 +41,6 @@ const StyledCard = styled.a`
   border-radius: 7px;
   overflow: hidden;
   width: 100%;
-  /* max-height: 115px;
-  height: 100%; */
-
   margin: 1rem auto;
   cursor: pointer;
 
@@ -55,26 +52,14 @@ const StyledCard = styled.a`
 const StyledImageWrapper = styled.div`
   flex: 0 0 15%;
   position: relative;
-  /* overflow: hidden; */
 
   width: auto;
   height: 70px;
-
-  /* &::after {
-    display: block;
-    content: '';
-    padding-top: 100%;
-  } */
 `;
 
 const StyledImage = styled.img`
   display: block;
   height: 100%
-  /* position: absolute;
-  left: 0;
-  right: 0; */
-  /* width: auto;
-  height: 100%; */
 `;
 
 const StyledContentWrapper = styled.div`
@@ -87,7 +72,6 @@ const StyledName = styled.div`
   color: ${props => props.theme.cards.title.color};
   font-size: 1.6rem;
   font-weight: 900;
-  /* font-family: 'SfDistantGalaxy'; */
 
   @media (max-width: 1000px){
     font-size: 1.2rem;

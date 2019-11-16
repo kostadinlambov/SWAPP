@@ -4,7 +4,6 @@ import { createHttpLink } from 'apollo-link-http';
 import { resolvers, typeDefs } from './local';
 
 import authLink from './auth';
-
 const cache = new InMemoryCache();
 
 const httpLink = createHttpLink({
