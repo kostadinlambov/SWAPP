@@ -40,7 +40,7 @@ export default function Episodes(props) {
       errorMessage = errorMessage.split(':')[1].trim();
     }
 
-return (
+    return (
       <ErrorMessage textAlingn={'center'} margin={'4rem 0 0 0'}>
         {errorMessage}
       </ErrorMessage>
@@ -68,23 +68,19 @@ return (
 
 // Styled Components
 const EpisodesContainer = styled.section`
-  display:grid;
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 0.3rem;
   margin-top: 4rem;
 
-  @media (max-width: 1000px){
+  @media (max-width: 1000px) {
     grid-template-columns: 1fr 1fr;
   }
 
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     grid-template-columns: 1fr;
-
   }
 
-  @media (max-width: 600px){
+  @media (max-width: 600px) {
   }
-`
-
-
-
+`;

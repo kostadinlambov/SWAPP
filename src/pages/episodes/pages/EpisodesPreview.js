@@ -114,7 +114,6 @@ export default function EpisodesPreview(props) {
     people,
   } = data.episode;
 
-  
   const pageInfo = people['pageInfo'];
 
   const { endCursor, hasNextPage } = pageInfo;

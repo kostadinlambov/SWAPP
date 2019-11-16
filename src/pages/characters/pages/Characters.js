@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { useApolloClient } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -62,17 +62,16 @@ export default function Characters(props) {
   });
 
   useEffect(() => {
-    if(data){
-      const allCharacters = data['allPeople']['edges'] || [] ;
-      setCharacters(allCharacters)
+    if (data) {
+      const allCharacters = data['allPeople']['edges'] || [];
+      setCharacters(allCharacters);
     }
-    
   }, [data]);
 
   useEffect(() => {
-    return() => {
+    return () => {
       client.cache.reset();
-    }
+    };
   }, []);
 
   if (loading) return <Loading />;
@@ -90,7 +89,7 @@ export default function Characters(props) {
     );
   }
 
-  const pageInfo = data['allPeople']['pageInfo'] ;
+  const pageInfo = data['allPeople']['pageInfo'];
 
   const { endCursor, hasNextPage } = pageInfo;
 

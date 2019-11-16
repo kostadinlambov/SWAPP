@@ -32,7 +32,8 @@ export default function StarshipMainCard({ starship, ...props }) {
           Crew: <StyledSpan> {crew || ''}</StyledSpan>
         </StyledDescriptionWrapper>
         <StyledDescriptionWrapper>
-          Max Atmospheric Speed: <StyledSpan> {maxAtmosphericSpeed || ''}</StyledSpan>
+          Max Atmospheric Speed:{' '}
+          <StyledSpan> {maxAtmosphericSpeed || ''}</StyledSpan>
         </StyledDescriptionWrapper>
         <StyledDescriptionWrapper>
           Hyperdrive Rating: <StyledSpan> {hyperdriveRating || ''}</StyledSpan>

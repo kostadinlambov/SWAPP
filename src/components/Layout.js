@@ -2,7 +2,9 @@ import React from 'react';
 import { Container } from 'reactstrap';
 import styled from 'styled-components';
 
-export const Layout = props => <StyledContainer>{props.children}</StyledContainer>;
+export const Layout = props => (
+  <StyledContainer>{props.children}</StyledContainer>
+);
 
 const StyledContainer = styled(Container)`
   @media (max-width: 1000px) {

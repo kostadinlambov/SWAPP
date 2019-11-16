@@ -95,7 +95,7 @@ const StyledTitle = styled.div`
   margin: 0 0 0.4rem 0;
   line-height: 1;
 
-   @media (max-width: 1200px) {
+  @media (max-width: 1200px) {
     font-size: 1.6rem;
   }
 
@@ -103,7 +103,7 @@ const StyledTitle = styled.div`
     font-size: 1.4rem;
   }
 
-   @media (max-width: 600px) {
+  @media (max-width: 600px) {
     font-size: 1.2rem;
   }
 `;
@@ -122,7 +122,7 @@ const StyledDescription = styled.div`
     font-size: 1.2rem;
   }
 
-   @media (max-width: 600px) {
+  @media (max-width: 600px) {
     font-size: 1rem;
   }
 `;

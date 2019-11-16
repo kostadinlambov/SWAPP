@@ -4,12 +4,12 @@ import styled from 'styled-components';
 export default function EpisodesCard({ episode, ...props }) {
   const { title, image, openingCrawl, id } = episode;
 
-  const openingCrawlSubstr = openingCrawl.substring(0, 200)  + ' ...'
+  const openingCrawlSubstr = openingCrawl.substring(0, 200) + ' ...';
 
-  const onClickHandler = (e) => {
+  const onClickHandler = e => {
     e.preventDefault();
-    props.history.push(`/episodes/${id}`)
-  }
+    props.history.push(`/episodes/${id}`);
+  };
 
   return (
     <StyledCard onClick={onClickHandler}>
@@ -17,7 +17,7 @@ export default function EpisodesCard({ episode, ...props }) {
         <StyledImage src={image} alt="Episode image" />
       </StyledImageWrapper>
       <StyledContentWrapper>
-        <StyledTitle >{title}</StyledTitle>
+        <StyledTitle>{title}</StyledTitle>
         <StyledDescription>{openingCrawlSubstr}</StyledDescription>
       </StyledContentWrapper>
     </StyledCard>
@@ -38,14 +38,13 @@ const StyledCard = styled.a`
   margin: 2rem auto;
   cursor: pointer;
 
-  @media (max-width: 600px){
+  @media (max-width: 600px) {
     margin: 1rem auto;
     width: 70%;
   }
 `;
 
 const StyledImageWrapper = styled.div`
-
   position: relative;
   overflow: hidden;
 

@@ -6,7 +6,7 @@ import StarshipCard from './../../starships/components/StarshipCard';
 export default function CharacterPreview(props) {
   const character = props.history.location.state.character;
   const { name, starships } = character;
-  
+
   return (
     <StyledCharacterPageContainer>
       <StyledCharacterTitle>{name}</StyledCharacterTitle>
@@ -50,7 +50,7 @@ const StyledCharacterBodyContainer = styled.div`
   align-items: flex-start;
   margin: auto;
   padding: 2rem 0 1rem;
-  border-top: 1px solid #ABB1BA;
+  border-top: 1px solid #abb1ba;
 
   @media (max-width: 1000px) {
     flex-direction: column;
@@ -128,7 +128,7 @@ const StyledRightSideContainer = styled.div`
 
 const StyledStarshipsContainer = styled.div`
   padding-top: 1rem;
-  border-top: 1px solid #ABB1BA;
+  border-top: 1px solid #abb1ba;
 `;
 
 const StyledStarshipTitle = styled.div`

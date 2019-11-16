@@ -3,15 +3,7 @@ import styled from 'styled-components';
 import placeholder from '../../../assets/stormtrooper.jpeg';
 
 export default function CharacterCard({ character, ...props }) {
-  const {
-    name,
-    image,
-    height,
-    homeworld,
-    id,
-    mass,
-    species,
-  } = character;
+  const { name, image, height, homeworld, id, mass, species } = character;
 
   const characterImage = image || placeholder;
 
@@ -68,7 +60,7 @@ const StyledCard = styled.div`
     font-size: 1rem;
   }
 
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     font-size: 0.8rem;
   }
 `;
@@ -113,10 +105,9 @@ const StyledTitle = styled.div`
 
   @media (max-width: 1000px) {
     font-size: 1.2rem;
-
   }
 
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     font-size: 1rem;
   }
 `;

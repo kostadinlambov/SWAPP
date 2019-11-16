@@ -10,7 +10,7 @@ export default function LogoutButton() {
     localStorage.clear();
     client.cache.reset();
     client.writeData({ data: { isLoggedIn: false } });
-    localStorage.setItem('theme', JSON.stringify(localStorageTheme))
+    localStorage.setItem('theme', JSON.stringify(localStorageTheme));
   };
 
   return (

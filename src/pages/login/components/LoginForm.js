@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import {
-  Form,
-  FormGroup,
-  Input,
-} from 'reactstrap';
+import { Form, FormGroup, Input } from 'reactstrap';
 
-import styled  from 'styled-components';
-import ErrorMessage from '../../../components/ErrorMessage'
+import styled from 'styled-components';
+import ErrorMessage from '../../../components/ErrorMessage';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -70,7 +66,9 @@ class LoginForm extends Component {
           <StyledHeader>SWAPP</StyledHeader>
           <StyledForm onSubmit={this.onSubmitHandler}>
             <FormElementsWrapper>
-            <ErrorMessage padding={'0 0 0.5rem 0'}>{this.props.errorMessage}</ErrorMessage>
+              <ErrorMessage padding={'0 0 0.5rem 0'}>
+                {this.props.errorMessage}
+              </ErrorMessage>
               <div>
                 <FormGroup>
                   <StyledInput
@@ -93,11 +91,10 @@ class LoginForm extends Component {
                   />
                 </FormGroup>
               </div>
-               <div className="text-align-right">
-                 <StyledButton>Login</StyledButton>
+              <div className="text-align-right">
+                <StyledButton>Login</StyledButton>
               </div>
             </FormElementsWrapper>
-            
           </StyledForm>
         </FormWrapper>
       </>
@@ -133,8 +130,8 @@ const FormElementsWrapper = styled.div`
   margin: auto;
   position: relative;
 
-  .text-align-right{
-    text-align:right
+  .text-align-right {
+    text-align: right;
   }
 `;
 
@@ -169,18 +166,17 @@ const StyledHeader = styled.h2`
   line-height: 1;
   margin-bottom: 0;
 
-  @media (max-width: 1000px){
+  @media (max-width: 1000px) {
     font-size: 4rem;
   }
 
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     font-size: 3rem;
   }
 
-  @media (max-width: 600px){
+  @media (max-width: 600px) {
     font-size: 2rem;
   }
-
 `;
 
 const StyledInput = styled(Input)`
@@ -189,7 +185,7 @@ const StyledInput = styled(Input)`
     border-color: ${props => props.theme.input.borderColor};
     color: ${props => props.theme.input.color};
     width: 92%;
-    padding: .125rem .75rem;
+    padding: 0.125rem 0.75rem;
     margin: auto;
     line-height: 0.8;
   }

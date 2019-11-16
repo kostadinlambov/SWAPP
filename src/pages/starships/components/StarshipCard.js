@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import placeholder from '../../../assets/stormtrooper.jpeg';
 
 export default function StarshipCard({ starship, ...props }) {
-  console.log('starship: ', starship)
-  const { name, image, id} = starship;
+  console.log('starship: ', starship);
+  const { name, image, id } = starship;
 
   const characterImage = image || placeholder;
 
@@ -59,7 +59,7 @@ const StyledImageWrapper = styled.div`
 
 const StyledImage = styled.img`
   display: block;
-  height: 100%
+  height: 100%;
 `;
 
 const StyledContentWrapper = styled.div`
@@ -73,12 +73,11 @@ const StyledName = styled.div`
   font-size: 1.6rem;
   font-weight: 900;
 
-  @media (max-width: 1000px){
+  @media (max-width: 1000px) {
     font-size: 1.2rem;
   }
 
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     font-size: 1rem;
   }
-
 `;

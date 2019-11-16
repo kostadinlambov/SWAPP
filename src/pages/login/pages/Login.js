@@ -3,7 +3,7 @@ import { useApolloClient, useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 import LoginForm from './../components/LoginForm';
-import {Loading} from '../../../components/Loading';
+import { Loading } from '../../../components/Loading';
 
 const LOGIN_USER = gql`
   mutation signIn($email: String!, $password: String!) {
@@ -22,17 +22,17 @@ export default function Login() {
     },
   });
 
-  if (loading) return <Loading spinnerSize={'15rem'} marginTop={'5rem'}/>;
+  if (loading) return <Loading spinnerSize={'15rem'} marginTop={'5rem'} />;
   if (error) {
     debugger;
     let errorMessage = error.message;
-  
-    if(errorMessage.startsWith('GraphQL error:')){
+
+    if (errorMessage.startsWith('GraphQL error:')) {
       errorMessage = errorMessage.split(':')[1].trim();
     }
-  
-    return <LoginForm login={signIn} errorMessage={errorMessage}/>;
-  } 
 
-  return <LoginForm login={signIn}  errorMessage={''}/>;
+    return <LoginForm login={signIn} errorMessage={errorMessage} />;
+  }
+
+  return <LoginForm login={signIn} errorMessage={''} />;
 }

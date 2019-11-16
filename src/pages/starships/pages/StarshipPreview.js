@@ -181,7 +181,7 @@ const StyledCharacterBodyContainer = styled.div`
   align-items: flex-start;
   margin: auto;
   padding: 2rem 0 1rem;
-  border-top: 1px solid #ABB1BA;
+  border-top: 1px solid #abb1ba;
 
   @media (max-width: 1000px) {
     flex-direction: column;
@@ -279,23 +279,21 @@ const StyledRightSideContainer = styled.div`
   }
 `;
 
-
 const StyledStarshipsContainer = styled.div`
   flex: 0 1 55%;
-   width: 100%;
+  width: 100%;
   height: 350px;
   margin: auto;
 
   display: flex;
   flex-direction: column;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
 
   padding-top: 1rem;
-  border-top: 1px solid #ABB1BA;
+  border-top: 1px solid #abb1ba;
   background-color: ${props => props.theme.cards.backgroundColor};
   color: ${props => props.theme.cards.color};
-
 
   @media (max-width: 1000px) {
     max-width: 350px;
@@ -311,7 +309,7 @@ const StyledRadarWrapper = styled.div`
   width: 100%;
   height: 100%;
   margin: auto;
-`
+`;
 
 const StyledStarshipTitle = styled.div`
   font-family: 'SfDistantGalaxy';
