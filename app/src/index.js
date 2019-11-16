@@ -10,7 +10,6 @@ import './index.css';
 import { ApolloProvider } from '@apollo/react-hooks';
 import client from './client/index';
 
-
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Router>

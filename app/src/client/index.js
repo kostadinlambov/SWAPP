@@ -2,6 +2,7 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createHttpLink } from 'apollo-link-http';
 import { resolvers, typeDefs } from './local';
+
 import authLink from './auth';
 
 const cache = new InMemoryCache();

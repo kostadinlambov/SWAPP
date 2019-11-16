@@ -2,13 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
-import StarshipCard from './../components/StarshipCard';
 import StarshipMainCard from './../components/StarshipMainCard';
 import RadarChartComponent from './../components/RadarChartComponent';
 import gql from 'graphql-tag';
 import { Loading } from '../../../components/Loading';
 import ErrorMessage from '../../../components/ErrorMessage';
-import { Minimatch } from 'minimatch';
 
 const StarshipStats_QUERY = gql`
   query StarshipStats($starshipClass: String) {

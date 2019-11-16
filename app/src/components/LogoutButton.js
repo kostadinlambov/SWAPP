@@ -6,9 +6,11 @@ export default function LogoutButton() {
   const client = useApolloClient();
 
   const onLogoutHandler = () => {
+    const localStorageTheme = JSON.parse(localStorage.getItem('theme'));
     localStorage.clear();
     client.cache.reset();
     client.writeData({ data: { isLoggedIn: false } });
+    localStorage.setItem('theme', JSON.stringify(localStorageTheme))
   };
 
   return (
